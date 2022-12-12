@@ -12,19 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Wpf.Controls;
 
-namespace Wpf
+namespace Wpf.Controls;
+/// <summary>
+/// Interaction logic for PaymentsControl.xaml
+/// </summary>
+public partial class PaymentsControl : UserControl
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public PaymentsControl()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            content.Content = new PaymentsControl();
-        }
+        InitializeComponent();
     }
 }

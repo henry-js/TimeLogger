@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Wpf.Controls;
 
-namespace Wpf;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace Wpf.Controls
 {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for AboutControl.xaml
+    /// </summary>
+    public partial class AboutControl : UserControl
     {
-        InitializeComponent();
-        content.Content = new ClientControl();
+        public AboutControl()
+        {
+            InitializeComponent();
+        }
     }
 }
-

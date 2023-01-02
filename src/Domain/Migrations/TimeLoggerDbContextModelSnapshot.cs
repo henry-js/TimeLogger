@@ -71,7 +71,7 @@ namespace TimeLogger.Domain.Migrations
                     b.ToTable("Client");
                 });
 
-            modelBuilder.Entity("TimeLogger.Domain.Models.Default", b =>
+            modelBuilder.Entity("TimeLogger.Domain.Models.Defaults", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace TimeLogger.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Default");
+                    b.ToTable("Defaults");
                 });
 
             modelBuilder.Entity("TimeLogger.Domain.Models.Payment", b =>

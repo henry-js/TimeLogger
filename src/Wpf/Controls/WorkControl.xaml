@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         
         <!-- Row 0 -->
-        <TextBlock FontSize="24">Edit Client Work</TextBlock>
+        <TextBlock FontSize="24" Grid.Row="0">Edit Client Work</TextBlock>
 
         <!-- Row 1 -->
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="5 5 5 10">

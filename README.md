@@ -41,3 +41,15 @@ made for those hours.
  | **MinimumHours**         | RoundUpAfterXMinutes |          | PaymentId   |
  | **BillingIncrement**     |                      |          |             |
  | **RoundUpAfterXMinutes** |                      |          |             |
+
+
+
+
+
+
+
+### DefaultControl Notes
+
+1. Validate form when submit button clicked
+2. Save model to db if valid
+3. Notify user if invalid

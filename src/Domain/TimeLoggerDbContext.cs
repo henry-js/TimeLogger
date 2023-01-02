@@ -5,7 +5,7 @@ namespace TimeLogger.Domain;
 public class TimeLoggerDbContext : DbContext
 {
     public DbSet<Client> Client { get; set; }
-    public DbSet<Default> Default { get; set; }
+    public DbSet<Defaults> Defaults { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Work> Work { get; set; }
 
@@ -42,23 +42,23 @@ public class TimeLoggerDbContext : DbContext
         modelBuilder.Entity<Client>()
                     .Property(c => c.RoundUpAfterXMinutes)
                     .HasDefaultValue(0);
-        // Default Table
-        modelBuilder.Entity<Default>()
+        // Defaults Table
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.PreBill)
                     .HasDefaultValue(false);
-        modelBuilder.Entity<Default>()
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.HasCutOff)
                     .HasDefaultValue(false);
-        modelBuilder.Entity<Default>()
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.CutOff)
                     .HasDefaultValue(0);
-        modelBuilder.Entity<Default>()
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.MinimumHours)
                     .HasDefaultValue(0);
-        modelBuilder.Entity<Default>()
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.BillingIncrement)
                     .HasDefaultValue(0.25f);
-        modelBuilder.Entity<Default>()
+        modelBuilder.Entity<Defaults>()
                     .Property(c => c.RoundUpAfterXMinutes)
                     .HasDefaultValue(0);
 

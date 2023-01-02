@@ -1,6 +1,6 @@
 namespace TimeLogger.Domain.Models;
 
-public class Default
+public class Defaults
 {
     public int Id { get; set; }
     public float HourlyRate { get; set; }

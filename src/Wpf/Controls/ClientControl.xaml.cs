@@ -11,8 +11,8 @@ namespace Wpf.Controls;
 /// </summary>
 public partial class ClientControl : UserControl
 {
-    private ObservableCollection<Client> clients = new();
-    bool isNewEntry = true;
+    private ObservableCollection<Client> _clients = new();
+    private bool _isNewEntry = true;
     public ClientControl()
     {
         InitializeComponent();
@@ -23,7 +23,7 @@ public partial class ClientControl : UserControl
 
     private void WireUpClientDropdown()
     {
-        clientDropDown.ItemsSource = clients;
+        clientDropDown.ItemsSource = _clients;
         clientDropDown.DisplayMemberPath = "Name";
         clientDropDown.SelectedValuePath = "Id";
     }
@@ -31,12 +31,12 @@ public partial class ClientControl : UserControl
     private void InitializeClientList()
     {
         using var context = new TimeLoggerDbContext();
-        clients = new(context.Client.OrderBy(x => x.Name).ToList());
+        _clients = new(context.Client.OrderBy(x => x.Name).ToList());
     }
 
     private void newButton_Click(object sender, RoutedEventArgs e)
     {
-        isNewEntry = true;
+        _isNewEntry = true;
 
         ToggleFormFieldsDisplay(displayFields: true);
 
@@ -45,7 +45,7 @@ public partial class ClientControl : UserControl
     }
     private void editButton_Click(object sender, RoutedEventArgs e)
     {
-        isNewEntry = false;
+        _isNewEntry = false;
 
         if (clientDropDown.SelectedItem == null)
         {
@@ -59,7 +59,7 @@ public partial class ClientControl : UserControl
     }
     private void submitForm_Click(object sender, RoutedEventArgs e)
     {
-        if (isNewEntry == true)
+        if (_isNewEntry == true)
         {
             InsertClient();
         }
@@ -87,7 +87,7 @@ public partial class ClientControl : UserControl
             using var context = new TimeLoggerDbContext();
             context.Add(form.model);
             context.SaveChanges();
-            clients.Add(form.model);
+            _clients.Add(form.model);
         }
         ClearFormData();
 
@@ -99,15 +99,15 @@ public partial class ClientControl : UserControl
         var clientId = (int)clientDropDown.SelectedValue;
         using var context = new TimeLoggerDbContext();
         var client = context.Client.FirstOrDefault(x => x.Id == clientId);
-        nameTextBox.Text = client.Name;
-        emailTextBox.Text = client.Email;
-        hourlyRateTextBox.Text = client.HourlyRate.ToString();
-        preBillCheckbox.IsChecked = client.PreBill;
-        hasCutOffCheckbox.IsChecked = client.HasCutOff;
-        cutOffTextbox.Text = client.CutOff.ToString();
-        minimumHoursTextbox.Text = client.MinimumHours.ToString();
-        billingIncrementTextbox.Text = client.BillingIncrement.ToString();
-        roundUpAfterTextbox.Text = client.RoundUpAfterXMinutes.ToString();
+        nameTextBox.Text = client?.Name;
+        emailTextBox.Text = client?.Email;
+        hourlyRateTextBox.Text = client?.HourlyRate.ToString();
+        preBillCheckbox.IsChecked = client?.PreBill;
+        hasCutOffCheckbox.IsChecked = client?.HasCutOff;
+        cutOffTextbox.Text = client?.CutOff.ToString();
+        minimumHoursTextbox.Text = client?.MinimumHours.ToString();
+        billingIncrementTextbox.Text = client?.BillingIncrement.ToString();
+        roundUpAfterTextbox.Text = client?.RoundUpAfterXMinutes.ToString();
     }
 
     private void UpdateClient()
@@ -128,7 +128,7 @@ public partial class ClientControl : UserControl
 
     private void ResetForm()
     {
-        isNewEntry = true;
+        _isNewEntry = true;
         ClearFormData();
         ToggleFormFieldsDisplay(false);
         WireUpClientDropdown();
@@ -152,7 +152,7 @@ public partial class ClientControl : UserControl
         using var context = new TimeLoggerDbContext();
         Defaults? model = context.Defaults.FirstOrDefault();
 
-        if (model == null)
+        if (model is null)
         {
             ClearFormData();
             return;
@@ -172,7 +172,7 @@ public partial class ClientControl : UserControl
     {
         bool isValid = true;
         Client model = new();
-        model.Id = isNewEntry != true ? (int)clientDropDown.SelectedValue : model.Id;
+        model.Id = _isNewEntry != true ? (int)clientDropDown.SelectedValue : model.Id;
 
         try
         {
@@ -217,6 +217,4 @@ public partial class ClientControl : UserControl
         clientStackPanel.Visibility = buttonVisibility;
         buttonStackPanel.Visibility = display;
     }
-
-
 }
